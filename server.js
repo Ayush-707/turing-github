@@ -268,3 +268,96 @@ function UpdateInterface()
 	RenderSteps();
 	RenderLineMarkers();
 }
+
+
+/* SetStatusMessage(): display sString in the status message area */
+/* nBgFlash: 1: flash green for success; 2: flash red for failure; -1: do not flash, even if repeating a message */
+function SetStatusMessage( sString, nBgFlash )
+{
+	$( "#MachineStatusMsgText" ).text( sString );
+  if( nBgFlash > 0 ) {
+    $("#MachineStatusMsgBg").stop(true, true).css("background-color",(nBgFlash==1?"#c9f2c9":"#ffb3b3")).show().fadeOut(600);
+  }
+  if( sString != "" && sPreviousStatusMsg == sString && nBgFlash != -1 ) {
+    $("#MachineStatusMsgBg").stop(true, true).css("background-color","#bbf8ff").show().fadeOut(600);
+  }
+  if( sString != "" ) sPreviousStatusMsg = sString;
+}
+
+/* SetSyntaxMessage(): display a syntax error message in the textarea */
+function SetSyntaxMessage( msg )
+{
+	$("#SyntaxMsg").text( (msg?msg:"") )
+}
+
+/* RenderTape(): show the tape contents and head position in the MachineTape div */
+function RenderTape()
+{
+	/* calculate the strings:
+	  sFirstPart is the portion of the tape to the left of the head
+	  sHeadSymbol is the symbol under the head
+	  sSecondPart is the portion of the tape to the right of the head
+	*/
+	var nTranslatedHeadPosition = nHeadPosition - nTapeOffset;  /* position of the head relative to sTape */
+	var sFirstPart, sHeadSymbol, sSecondPart;
+	debug( 4, "RenderTape: translated head pos: " + nTranslatedHeadPosition + "  head pos: " + nHeadPosition + "  tape offset: " + nTapeOffset );
+	debug( 4, "RenderTape: sTape = '" + sTape + "'" );
+
+	if( nTranslatedHeadPosition > 0 ) {
+		sFirstPart = sTape.substr( 0, nTranslatedHeadPosition );
+	} else {
+		sFirstPart = "";
+	}
+	if( nTranslatedHeadPosition > sTape.length ) {  /* Need to append blanks to sFirstPart.  Shouldn't happen but just in case. */
+		sFirstPart += repeat( " ", nTranslatedHeadPosition - sTape.length );
+	}
+	sFirstPart = sFirstPart.replace( /_/g, " " );
+	
+	if( nTranslatedHeadPosition >= 0 && nTranslatedHeadPosition < sTape.length ) {
+		sHeadSymbol = sTape.charAt( nTranslatedHeadPosition );
+	} else {
+		sHeadSymbol = " ";	/* Shouldn't happen but just in case */
+	}
+	sHeadSymbol = sHeadSymbol.replace( /_/g, " " );
+	
+	if( nTranslatedHeadPosition >= 0 && nTranslatedHeadPosition < sTape.length - 1 ) {
+		sSecondPart = sTape.substr( nTranslatedHeadPosition + 1 );
+	} else if( nTranslatedHeadPosition < 0 ) {  /* Need to prepend blanks to sSecondPart. Shouldn't happen but just in case. */
+		sSecondPart = repeat( " ", -nTranslatedHeadPosition - 1 ) + sTape;
+	} else {  /* nTranslatedHeadPosition > sTape.length */
+		sSecondPart = "";
+	}
+	sSecondPart = sSecondPart.replace( /_/g, " " );
+	
+	debug( 4, "RenderTape: sFirstPart = '" + sFirstPart + "' sHeadSymbol = '" + sHeadSymbol + "'  sSecondPart = '" + sSecondPart + "'" );
+	
+	/* Display the parts of the tape */
+	$("#LeftTape").text( sFirstPart );
+	$("#ActiveTape").text( sHeadSymbol );
+	$("#RightTape").text( sSecondPart );
+//	debug( 4, "RenderTape(): LeftTape = '" + $("#LeftTape").text() + "' ActiveTape = '" + $("#ActiveTape").text() + "' RightTape = '" + $("#RightTape").text() + "'" );
+	
+	/* Scroll tape display to make sure that head is visible */
+	if( $("#ActiveTapeArea").position().left < 0 ) {
+		$("#MachineTape").scrollLeft( $("#MachineTape").scrollLeft() + $("#ActiveTapeArea").position().left - 10 );
+	} else if( $("#ActiveTapeArea").position().left + $("#ActiveTapeArea").width() > $("#MachineTape").width() ) {
+		$("#MachineTape").scrollLeft( $("#MachineTape").scrollLeft() + ($("#ActiveTapeArea").position().left - $("#MachineTape").width()) + 10 );
+	}
+}
+
+function RenderState()
+{
+	$("#MachineState").text( sState );
+}
+
+function RenderSteps()
+{
+	$("#MachineSteps").text( nSteps );
+}
+
+function RenderLineMarkers()
+{
+  var oNextList = $.map(GetNextInstructions( sState, GetTapeSymbol( nHeadPosition ) ), function(x){return(x.sourceLineNumber);} );
+	debug( 3, "Rendering line markers: " + (oNextList) + " " + (oPrevInstruction?oPrevInstruction.sourceLineNumber:-1) );
+	SetActiveLines( oNextList, (oPrevInstruction?oPrevInstruction.sourceLineNumber:-1) );
+}
