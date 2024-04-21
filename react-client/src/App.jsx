@@ -11,6 +11,7 @@ function App() {
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+        setData('Error fetching data');
       });
   }, []);
 
