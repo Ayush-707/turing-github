@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 
-@app.route('/api/home/')
+@app.route('/data/')
 def hello():
-    return {"members": ["Member1", "Member2", "Member3"]}
+    data = {'message': 'Hello from Flask!'}
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

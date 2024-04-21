@@ -1,32 +1,28 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  const [data, setData] = useState([{}])
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("/api/home").then(
-      res => {
-        
-      }
-    ).then(
-        data => {
-          setData(data)
-          console.log(data)
-        }
-    )
-  }, [])
+    axios.get('/api/data/')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <div>
-      {(typeof data.members === 'undefined') ? (
-        <p>Loading...</p>
+      {data ? (
+        <p>{data.message}</p>
       ) : (
-        data.members.map((member,i) => (
-          <p key = {i}>{member}</p>
-        ))
+        <p>Loading...</p>
       )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
