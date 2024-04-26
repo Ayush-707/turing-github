@@ -36,7 +36,7 @@ function Tape({ initialInput }) {
         type="text"
         value={initialInput}
         onChange={(e) => updateTapeContent(e.target.value.split(''))}
-        placeholder="Enter 0 or 1"
+        placeholder="Initial Input"
       />
     </div>
   );

@@ -32,11 +32,7 @@ function Controls({ runCode, pauseCode, stepCode, resetCode, loadExample, handle
                 <button onClick={resetCode}>Reset</button>
             </div>
 
-            {/* Initial Input Box */}
-            <input type="text" placeholder="Initial Input"
-                value={initialInput.join('')} // Convert the array back to a string for display
-                onChange={handleInputChange}
-            />
+          
 
         
         </div>
