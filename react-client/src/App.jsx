@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
+
+import React, { useState } from 'react';
+import './App.css';
+
+import TuringProgram from './TuringProgram';
+import Turing from './Turing';
 
 function App() {
-  const [data, setData] = useState(null);
+  const [exampleProgram, setExampleProgram, initialInput, setInitialInput] = useState('');
 
-  useEffect(() => {
-    axios.get('/api/data/')
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setData('Error fetching data');
-      });
-  }, []);
+  const handleLoadExample = (exampleText) => {
+    setExampleProgram(exampleText);
+  };
 
   return (
-    <div>
-      {data ? (
-        <p>{data.message}</p>
-      ) : (
-        <p>Loading...</p>
-      )}
+    <div className="App">
+
+<Turing initialInput={initialInput} />
+
     </div>
   );
 }

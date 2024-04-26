@@ -1,0 +1,15 @@
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .buttons-container button {
+    margin-bottom: 8px;
+  }
+  

@@ -1,0 +1,176 @@
+/* Tape.css */
+
+.tape-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tape {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tape-cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 5px;
+  }
+  
+  .head-cell {
+    background-color: blue;
+    color: white;
+  }
+  
+  .controls {
+    margin-top: 10px;
+  }
+  
+  .state-register {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    float: left; /* Position on the left */
+  }
+
+  
+  /* StepsCount.css */
+  
+  .steps-count {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    float: right; /* Position on the right */
+  }
+
+  
+  .contro button {
+    /* Add CSS styles for the buttons */
+    /* For example, set width, height, background color, margin, padding, etc. */
+    width: 100px; /* Adjust width as needed */
+    height: 30px;
+    background-color: #007bff;
+    color: #fff;
+    margin-right: 10px; /* Add right margin to separate buttons */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contro button:last-child {
+    margin-right: 0; /* Remove right margin for the last button */
+  }
+
+  .controls {
+    /* Add CSS styles for the Controls container */
+    /* For example, set width, margin, padding, etc. */
+    width: 200px;
+    margin-top: 20px; /* Adjust top margin to create space */
+  }
+  
+  .controls button {
+    /* Add CSS styles for the buttons */
+    /* For example, set width, height, background color, margin, padding, etc. */
+    width: 80%;
+    height: 40px;
+    background-color: #535cc1;
+    color: #fff;
+    margin-bottom: 10px; /* Add bottom margin to separate buttons */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .controls input[type="text"],
+  .controls select {
+    /* Add CSS styles for the input and select elements */
+    /* For example, set width, height, margin, padding, etc. */
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px; /* Add bottom margin to separate elements */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .controls button:last-child {
+    margin-bottom: 0; /* Remove bottom margin for the last button */
+  }
+
+  /* TuringProgram.css */
+
+.turing-program {
+    display: flex;
+    max-width: 800px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .line-numbers {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+  }
+  
+  .line-numbers > div {
+    font-size: 12px;
+    line-height: 20px;
+  }
+  
+  .program-textarea {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  
+  .load-example {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .load-example h2 {
+    margin-bottom: 10px;
+  }
+  
+  .load-example ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .load-example li {
+    margin-bottom: 5px;
+  }
+  
+  .load-example button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .load-example button:hover {
+    background-color: #0056b3;
+  }
+  
