@@ -3,32 +3,23 @@ import PropTypes from 'prop-types';
 import './Tape.css'; // Import CSS for styling
 
 function Tape({ initialInput }) {
-  // Define initial tape content and head position
-  const [tapeContent, setTapeContent] = useState([]);
+  const [tapeContent, setTapeContent] = useState([initialInput]); // Start with the initial input
   const [headPosition, setHeadPosition] = useState(0);
 
-  // Function to move the head left
   const moveLeft = () => {
-    setHeadPosition(prevPosition => (prevPosition === 0 ? prevPosition : prevPosition - 1));
+    setHeadPosition(prevPosition => Math.max(prevPosition - 1, 0)); // Ensure head doesn't go out of bounds
   };
 
-  // Function to move the head right
   const moveRight = () => {
-    setHeadPosition(prevPosition => prevPosition + 1);
+    setHeadPosition(prevPosition => Math.min(prevPosition + 1, tapeContent.length - 1)); // Ensure head doesn't go out of bounds
   };
 
-  // Function to update tape content at head position
-  const updateTapeContent = (symbol) => {
-    if (symbol === '0' || symbol === '1') {
-      const newTapeContent = [...tapeContent];
-      newTapeContent[headPosition] = symbol;
-      setTapeContent(newTapeContent);
-    }
+  const updateTapeContent = (newContent) => {
+    setTapeContent(newContent);
   };
 
   return (
     <div className="tape-container">
-      {/* Tape */}
       <div className="tape">
         {tapeContent.map((symbol, index) => (
           <div key={index} className={`tape-cell${index === headPosition ? ' head-cell' : ''}`}>
@@ -36,18 +27,15 @@ function Tape({ initialInput }) {
           </div>
         ))}
       </div>
-      {/* Head pointer */}
-      <div className="head" style={{ left: `${headPosition * 20}px` }}></div>
-      {/* Controls */}
+      <div className="head" style={{ left: `${headPosition * 40}px` }}></div>
       <div className="contro">
         <button onClick={moveLeft}>Move Left</button>
         <button onClick={moveRight}>Move Right</button>
       </div>
-      {/* Initial Input Box */}
       <input
         type="text"
         value={initialInput}
-        onChange={(e) => updateTapeContent(e.target.value)}
+        onChange={(e) => updateTapeContent(e.target.value.split(''))}
         placeholder="Enter 0 or 1"
       />
     </div>
