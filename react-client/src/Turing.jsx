@@ -1,11 +1,12 @@
-import React from 'react';
-import './Turing.css'; // Import CSS for styling
-import Tape from './Tape.js'; // Import Tape component
-import StateRegister from './StateRegister.js'; // Import StateRegister component
-import StepsCount from './StepsCount.js'; 
-import TuringProgram from './TuringProgram.js';
 
-import Controls from './Controls.js'; // Import Controls component
+
+import React from 'react';
+import Tape from './Tape';
+import StateRegister from './StateRegister';
+import StepsCount from './StepsCount';
+import TuringProgram from './TuringProgram';
+import Controls from './Controls';
+import './Turing.css'; 
 
 
 function Turing() {
