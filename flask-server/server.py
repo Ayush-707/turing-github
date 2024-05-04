@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from automata.tm.dtm import DTM
 from automata.base import exceptions
 from io import StringIO
@@ -41,34 +41,43 @@ dtm = DTM(
 input_str = "000111"
 
 # Call the read_input_stepwise method on the instance
-generator = dtm.read_input_stepwise(input_str)
 
 
-@app.route('/data/')
 
-def hello():
-    #data = {'message': 'Hello from Flask!'}
-
-   
-
+@app.route('/data/', methods=['POST'])
+def receive_data():
     try:
-    # Code that uses the generator
-        for config in generator:
-        # Do something with the TMConfiguration instance
-            stdout_backup = sys.stdout
-            sys.stdout = StringIO()
+        # Parse the JSON data from the request body
+        data = request.json
+        # Access the specific field (in this case 'myInput')
+        binary_string = data.get('inputValue')
+        
+        # Do something with the received data
+        print('Received input:', binary_string)
+        generator = dtm.read_input_stepwise(input_str)
 
-            config.print()
 
-            output = sys.stdout.getvalue()
+        try:    
+        # Code that uses the generator
+            for config in generator:
+            # Do something with the TMConfiguration instance
+                
 
-            sys.stdout = stdout_backup
-            return output
+                config.print()
 
-        else:
-            return jsonify("Accepted")
-    except exceptions.RejectionException as e:
-        return jsonify (e)
+
+            else:
+                return jsonify("Accepted")
+        
+        except exceptions.RejectionException as e:
+            return jsonify (e)
+
+
+        # # Optionally, you can send a response back to the frontend
+        # return jsonify({'message': 'Data received successfully'})
+    except Exception as e:
+        # Handle any exceptions
+        return jsonify({'error': str(e)}), 500
 
    
 

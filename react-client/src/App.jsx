@@ -1,25 +1,16 @@
+import Form from "./Components/Form";
 
+const App = () => {
 
-import React, { useState } from 'react';
-import './App.css';
-
-import TuringProgram from './TuringProgram';
-import Turing from './Turing';
-
-function App() {
-  const [exampleProgram, setExampleProgram, initialInput, setInitialInput] = useState('');
-
-  const handleLoadExample = (exampleText) => {
-    setExampleProgram(exampleText);
-  };
-
+  
   return (
-    <div className="App">
-
-<Turing initialInput={initialInput} />
-
+    <div>
+    
+      <h2>Turing Machine Input</h2>
+        <Form />
+      <h1>OUTPUT: </h1>
     </div>
   );
-}
+};
 
 export default App;
