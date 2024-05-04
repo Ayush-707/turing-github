@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Form from "./Components/Form";
 
 const App = () => {
@@ -10,7 +10,8 @@ const App = () => {
 
   return (
     <div>
-      <h2>Turing Machine Input</h2>
+      <h1>Turing Machine</h1>
+      <h2>Matches any string starting with 0s followed by equal number of 1s</h2>
       <Form onChange={handleChange}/>
       {output !== '' && (
         <div>
