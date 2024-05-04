@@ -4,10 +4,19 @@ import TextInput from './TextInput'; // Assuming TextInput is in a separate file
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { sendInput } from '../APIs/Request';
+import PropTypes from 'prop-types';
 
-function Form() {
+
+
+Form.propTypes = {
+  //value: PropTypes.string,
+  onChange: PropTypes.func
+}
+
+function Form({onChange}) {
 
    const [inputValue, setInputValue] = useState('');
+   
    
    const handleChange = (value) => {
     setInputValue(value);
@@ -21,6 +30,10 @@ function Form() {
         //console.log('Machine number: ', machine);
         const data = {inputValue}
         const res = await sendInput(data)
+
+        onChange(res.data)
+
+        
 
         console.log(res)
     };

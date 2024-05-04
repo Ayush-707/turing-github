@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 from automata.tm.dtm import DTM
 from automata.base import exceptions
-from io import StringIO
-import sys
+import io
+from contextlib import redirect_stdout
 
 app = Flask(__name__)
 
@@ -59,22 +59,19 @@ def receive_data():
 
         try:    
         # Code that uses the generator
-            for config in generator:
-            # Do something with the TMConfiguration instance
-                
-
-                config.print()
-
-
-            else:
-                return jsonify("Accepted")
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                for config in generator:
+                # Do something with the TMConfiguration instance
+                    config.print()
+            
+            output = buf.getvalue()
+            print('Accepted!')
+            return(output)
         
         except exceptions.RejectionException as e:
             return jsonify (e)
 
-
-        # # Optionally, you can send a response back to the frontend
-        # return jsonify({'message': 'Data received successfully'})
     except Exception as e:
         # Handle any exceptions
         return jsonify({'error': str(e)}), 500
