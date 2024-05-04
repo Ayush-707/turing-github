@@ -15,7 +15,7 @@ const App = () => {
       {output !== '' && (
         <div>
           <h1>OUTPUT:</h1>
-          <p>{output}</p>
+          <pre style={{ whiteSpace: 'pre-wrap' }}>{output}</pre>
         </div>
       )}
     </div>

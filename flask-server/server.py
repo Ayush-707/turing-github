@@ -54,7 +54,7 @@ def receive_data():
         
         # Do something with the received data
         print('Received input:', binary_string)
-        generator = dtm.read_input_stepwise(input_str)
+        generator = dtm.read_input_stepwise(binary_string)
 
 
         try:    
@@ -70,10 +70,11 @@ def receive_data():
             return(output)
         
         except exceptions.RejectionException as e:
-            return jsonify (e)
+            return jsonify (str(e))
 
     except Exception as e:
         # Handle any exceptions
+        
         return jsonify({'error': str(e)}), 500
 
    
