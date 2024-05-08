@@ -1,0 +1,82 @@
+/* Form.css */
+
+.form-container {
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .submit-button,
+  .action-button {
+    width: 100px;
+    margin-right: 10px;
+  }
+  
+  .submit-button:hover,
+  .action-button:hover {
+    background-color: #ff6f61; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+  }
+  
+  /* Add more CSS styles as needed  Tape.css */
+  
+  .tape-container {
+    position: relative; /* Set container to relative positioning */
+  }
+
+ 
+  
+  .tape-head {
+    position: absolute; /* Set head to absolute positioning */
+    bottom: calc(100% + 10px); /* Position head just below the tape cells */
+    left: 50%; /* Center head horizontally */
+    transform: translateX(-50%); /* Adjust to center the head */
+  }
+  
+
+ 
+  
+  
+  .tape-content {
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+  }
+  
+  .tape-cell {
+    width: 30px; /* Fixed width for each cell */
+    min-width: 30px; /* Minimum width for each cell */
+    height: 30px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .active {
+    background-color: yellow;
+  }
+  
+
+ 
+  
+  .head-arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid red;
+  }
+  
+  .tape-details {
+    margin-top: 10px;
+  }
+
+  .tape-cell.active {
+    background-color: yellow; /* Change the background color of the active cell */
+  }
+  
