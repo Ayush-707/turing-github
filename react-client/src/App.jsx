@@ -44,7 +44,7 @@ const App = () => {
   return (
     <div className="app-container">
       <h1>Turing Machine</h1>
-      <h2>Matches any string starting with 0s followed by an equal number of 1s</h2>
+      
       <Form onChange={handleChange} setHeadPosition={setHeadPosition} moveHead={moveHead} stopHead={stopHead} resetHead={resetHead} />
       <Tape input={output} headPosition={headPosition} currentState={currentState} steps={steps} onStop={stopHead} />
       {output !== '' && (
