@@ -44,6 +44,8 @@ const App = () => {
   return (
     <div className="app-container">
       <h1>Turing Machine</h1>
+      <h3>Turing Machine which detects strings starting with 0's following same number of 1's </h3>
+      <h3>Turing Machine which detects strings starting with 1's following same number of 0's </h3>
       
       <Form onChange={handleChange} setHeadPosition={setHeadPosition} moveHead={moveHead} stopHead={stopHead} resetHead={resetHead} />
       <Tape input={output} headPosition={headPosition} currentState={currentState} steps={steps} onStop={stopHead} />
